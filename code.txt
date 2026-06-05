@@ -22,3 +22,5 @@ public class StudentController {
 //controller service repository 
 //springboot --> mvc architecture (model view controller)
 //request --> backend--> controller ( data)-> service -> repo -> repository(communicate with data ) return back to service --> service decide what to do with data --> then data back to controller  and then to ->frontend
+
+

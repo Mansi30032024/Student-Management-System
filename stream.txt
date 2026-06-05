@@ -1,0 +1,72 @@
+stream api and lambda
+
+issue
+
+nums = [1,2,3,4,5,6]
+find even number then multiply by 10
+
+ArrayList<Integer> result = new ArrayList<>();
+
+code for finding even and then multiply and add in ArrayList
+for(int n:nums){
+  if(n%2 == 0){
+    result.add(n*10);
+  }
+}
+loops and conditions because of  logic hidden
+
+
+//solution
+sequential flow 
+sequential data flowing  through operations 
+
+stream process data 
+lambda shorter way to write functions anonyms way of function writing
+
+
+nums.stream()
+    .filter ( n->n%2 ==0)
+    .map( n->n*10)
+    .toList();
+
+
+business logic is not hidden inside any loop
+
+functional interface  (FI) : interface for lambda function
+lambda function is the shape of FI
+
+// nums.stream()
+//     .filter ( n->n%2 ==0)
+//     .map( n->n*10)
+//     .toList();
+
+iske liye header (public int n(){})  in FI
+
+Functional interface can only have one abstract method  becoz compiler will confuse if more than 1 method is there in FI
+
+@FunctionalInterface
+interface Calculator{
+  int calculate(int n){
+
+  }
+}
+
+calculator  c=n->n*10
+c.calculate(5)
+
+filter data and return
+
+/students/course
+backend m filter krenge and return krne filtered data 
+
+Stream API was introduced after java 8 
+collection processing ke liye stream api introduced 
+
+Predicate interface is mainly used for filtering , it will return boolean value 
+Functional interface  transforms/convert object to another object
+Supplier interface it will not take any input just return result
+consumer interface
+
+filter()
+transforms data --> map()
+count()

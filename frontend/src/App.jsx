@@ -10,20 +10,34 @@ function App(){
     console.log(data);
     setStudents(data);
   }
+
+    const getBcaStudents = async ()=>{
+    const response = await fetch('http://localhost:8080/students/bca');
+    const data = await response.json();
+    console.log(data);
+    setStudents(data);
+  }
+
   return(
     <div>
       <button onClick={getStudents}>
         Fetch Students
       </button>
+
+      <button onClick={getBcaStudents}>
+        Show BCA Students
+      </button>
       
       <ul>
        {students.map(student=>(
         <li key={student.id}>
-          {student.name}-  {student.course}
+          {student.name} -  {student.course}
         </li>
        ))
        }
       </ul>
+
+    
 
     </div>
   )
