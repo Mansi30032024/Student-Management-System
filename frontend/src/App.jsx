@@ -1,29 +1,43 @@
 import { useState } from "react";
 
 function App(){
-  const [student, setStudent] = useState(null);
+  const [students, setStudents] = useState([]);
 
   //function to get Student data from Backend
-  const getStudent = async ()=>{
-    const response = await fetch('http://localhost:8080/student');
+  const getStudents = async ()=>{
+    const response = await fetch('http://localhost:8080/students');
     const data = await response.json();
-    setStudent(data);
+    console.log(data);
+    setStudents(data);
   }
   return(
     <div>
-      <button onClick={getStudent}>
-        Fetch Student
+      <button onClick={getStudents}>
+        Fetch Students
       </button>
+      
+      <ul>
+       {students.map(student=>(
+        <li key={student.id}>
+          {student.name}-  {student.course}
+        </li>
+       ))
+       }
+      </ul>
+
+    </div>
+  )
+}
+export default App;
+
+    {/* 
       <h1>{student?.name}</h1>
- {/* ? for safety  , if there is no value in it then it will be consider as empty else an error will be there
+      <h1>{student?.id}</h1>
+
+ ? for safety  , if there is no value in it then it will be consider as empty else an error will be there
        If student exists (is not null or undefined), return student.name; otherwise, return undefined.
 This prevents runtime errors like:
 
 Cannot read properties of undefined (reading 'name')
 The { ... } syntax is JSX’s way of embedding JavaScript expressions inside HTML-like code.
-*/}
-  <h1>{student?.id}</h1>
-    </div>
-  )
-}
-export default App;
+ */}
