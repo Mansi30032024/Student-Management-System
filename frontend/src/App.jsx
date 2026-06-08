@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function App(){
   const [students, setStudents] = useState([]);
+   const [count, setCount] = useState(0);
 
   //function to get Student data from Backend
   const getStudents = async ()=>{
@@ -16,6 +17,14 @@ function App(){
     const data = await response.json();
     console.log(data);
     setStudents(data);
+  }
+
+  
+    const fetchTotalStudentsCount= async ()=>{
+    const response = await fetch('http://localhost:8080/students/count');
+    const data = await response.json();
+    console.log(data);
+    setCount(data);
   }
 
   return(
@@ -37,7 +46,8 @@ function App(){
        }
       </ul>
 
-    
+      <button onClick={fetchTotalStudentsCount}>Get Total Students Count</button>
+      <p>Total students: {count} </p>
 
     </div>
   )

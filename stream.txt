@@ -70,3 +70,50 @@ consumer interface
 filter()
 transforms data --> map()
 count()
+
+
+
+RAM is volatile { stack s --? reference in heap}
+data loss when pc shut down 
+so permanent db is required 
+
+JDBC:  API +standard  bridge b/w backend and db
+ jdbc gives drivers and  functions    that enable communication / setting up connectivity 
+ 
+JPA: java persistence api  (theortical concept of hibernate)
+  
+Hibernate : framework / implementation of JPA
+provides methods  { converting to mysql }
+on top of jdbc 
+
+
+Java --> JDBC --> mysql
+
+Spring initializer spring.io     spring web dependency --> restful apis 
+
+pom.xml -> it will download all necessary methods everything that is required for connection / communication setup 
+
+	<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+   </dependency>
+ install mysql 
+
+ application.properties --> connection
+
+
+ raw sql query in java 
+ jdbcTemplate jdbc query run krne ke liye 
+
+ @Autowired : this is for spring-boot  go to application-context and get the bean for jdbcTemplate
+ No framework --> code repeated --> compiled everything -> framework --> spring -->  spring-boot (on top of spring)
+ before spring-boot object manually create 
+ Dependency injection --> spring boot will create object 
+ bean --> object 
+ application -context/ bean factory m stored bean
+
+ no new keyword 
+ import and use whenever needed 
+
+previsously we are created object
+ioc --> spring boot is created objects
