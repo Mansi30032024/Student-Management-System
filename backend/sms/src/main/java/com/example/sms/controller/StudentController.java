@@ -5,21 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.sms.model.Student;
+import com.example.sms.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
 @CrossOrigin(origins="http://localhost:5173")
 public class StudentController {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    @Autowired 
+    private StudentService service;
 
     @GetMapping
     public ArrayList<Student> getStudent() {
@@ -41,11 +42,13 @@ public class StudentController {
 
     @GetMapping("/count")
     public int countStudents(){
-        String sql = "SELECT COUNT(*) FROM students";
-
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+        return service.getStudentCount();
     }
-
+   
+    @GetMapping("/message")
+    public String getMessage(){
+        return service.getStudentInfo();
+    }
   
 }
 

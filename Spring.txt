@@ -1,0 +1,33 @@
+java --> 1995
+
+servlet
+jsp
+spring
+hibernate orm
+jpa
+spring mvc
+spring boot
+spring cloud and microservice
+
+
+Spring Boot Core
+Ioc   DI   Spring Bean  Lifecycle
+
+@Service
+
+create a bean 
+application context m bean created
+
+spring create object --> called bean  @Autowired
+
+when student s = new student(); --> here called object
+
+Class a dependent on another 
+@Autowired : automatically injected 
+
+dependency injected 
+
+
+
+application context 
+bean factory --> created stored return  when requirement then only created 
