@@ -1,8 +1,17 @@
 package com.example.sms.model; //public accessible -->  only directory name mention  [can be import in other files to use ]
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="students")
 public class Student {
 //data field only accessible here only 
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String course;
 
@@ -11,13 +20,13 @@ public class Student {
 
     //use getter setter
    // this to assign data in particular parameters for different objects
-    public Student(int id, String name, String course) {
+    public Student(Integer id, String name, String course) {
         this.id = id;
         this.name = name;
         this.course = course;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

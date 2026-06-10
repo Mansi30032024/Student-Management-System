@@ -1,0 +1,63 @@
+java framework --> hibernate 
+hibernate methods used for sql queries
+
+hibernate framework 
+
+controller -> service -> repository{can communicated with database}
+
+
+application.properties
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+ddl-auto=update
+new entity  added --> automatically run alter in mysql
+
+mysql structure & java structure match --> and then map
+
+ddl-auto=create  --> for testing purpose 
+delete table (data deleted) and again create
+
+show-sql=true
+hibernate run sql query and that will be shown in terminal
+
+zip file --> use dependency in pom.xml it will automatically install dependency
+
+ <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+   </dependency>
+
+jpa is dependency 
+model to entity 
+annotations given by jpa
+
+class(model) to entity 
+
+int cannot hold null values
+INTEGER can hold null values
+
+jpa have methods , repository can only talk with database
+
+
+public interface StudentRepository {
+  
+}
+
+interface doesnot have body , jpa have , so we extract
+public interface StudentRepository  extends JpaRepository<Student, Integer>{
+  
+}
+
+
+
+injection 
+1. constructor 
+2. field injection  @Autowired
+
+
+JSON parse error: Cannot map `null` into type `int`
+
+
+Hibernate: insert into students (course,name) values (?,?)
+Hibernate: select s1_0.id,s1_0.course,s1_0.name from students s1_0
