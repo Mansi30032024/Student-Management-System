@@ -1,0 +1,184 @@
+DTO
+
+API
+A set of rules that allows communication between one software and another software, whether they are in the same system or different systems.
+
+REST API 
+Representational State Transfer
+
+ JSON is a:Representation of the resource.
+
+JSON is easy to convert in to object 
+Transfering representations of resources to change or retrieve state.
+
+
+soap  ->not used, complex xml 
+
+graphQL
+ rest return everything , graphQL allows to return specific fields 
+
+gRPC 
+call a method that is on other service/server
+developed by google , and uses it internally
+
+
+REST deals with urls , each url represents resource 
+api name matters 
+Resource should have urls.
+
+Your flow was:
+
+```
+React
+   ↓
+Controller
+   ↓
+Entity (Student)
+   ↓
+Repository
+   ↓
+Database
+```
+
+Everything used the same object:
+
+```
+Student
+```
+
+for:
+
+```
+Database
+Request Body
+Response Body
+```
+
+Works for learning.
+
+Not ideal for real projects.
+
+************************************* DTO ********************************************************
+model 
+model to entity
+
+data exposed to frontend
+entity is mapped with original table 
+
+DTO data transfer object --> request handled by DTO controller service repo  db 
+dto u can control data
+
+both will look like @Entity but actually they are not
+request dto data come 
+response dto
+
+
+@Entity
+public class Student {
+
+    private Integer id;
+    private String name;
+    private String course;
+    private String password;
+}
+remove nhi kr skte kyuki mismatch b/w virtual table and actual db table 
+*************************** controlling the data  *****************************
+
+
+
+
+RequestDTO decides which fields u want in request
+ResponseDTO decides which fields u want in response
+
+
+
+Class to class  extends 
+c to i  implements
+i to i extends
+
+
+StudentService.java 
+return repository.save(data);
+
+save() given by JPA in repository repo m public interface StudentRepository extends JpaRepository{}
+
+requestDTO --> controller-->
+JPA trigger [Repo] --> hibernate [SQL] --> JDBC{Bridge} --> mysql (driver) sql executed --> mysql 
+
+JPA only know about Entity doesnot aware of DTO
+2 times data conversion
+
+requestDTO m constructor nhi h, we will not assign the data , data just come and we forward it 
+
+but in responseDTO constructor created, data come from db --> and u will assign it (store krenge fir bhejenge)
+
+
+package com.example.sms.exception;
+public class StudentNotFindException extends RuntimeException{
+     public StudentNotFindException(String message){
+           super(message);
+     }
+}
+
+when data is not database --> 500 error  but this is useless for users so u have to return a message that is understandable by users
+RuntimeException --> any error related to studentNotFound then it comes here and a message is passed to parent
+pass message to controller 
+
+global excpetion : beautify error 
+take the message nd just return it in response
+
+package com.example.sms.exception;
+
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice 
+public class GlobalExceptionHandler {
+    
+   @ExceptionHandler(StudentNotFindException.class)
+   public ResponseEntity<?> handleStudentNotFoundException(StudentNotFindException ex){
+    return  ResponseEntity
+            .badRequest()
+            .body(Map.of("message", ex.getMessage()));
+   }
+
+}
+
+
+@Controller : this class handles normal requests. spring ko btati handle request (GET, POST, DELETE, PUT)
+
+@RestControllerAdvice tell spring class handle error globally
+
+ @ExceptionHandler(StudentNotFoundException.class)
+ StudentNotFoundException this is called isme exception aati h then only the method runs
+
+@ResponseEntity  control response 
+
+Map will create a JSON { "message":"Student Not Found" } 
+else it will return string
+
+
+GlobalExceptionHNDLER --> MESSAGE--> beautify { "message" : "Student not found"}  --> return to service
+ public Student getStudentById(Integer id){
+        return repository
+               .findById(id)
+               .orElseThrow(()-> new StudentNotFoundException("Student not found with id: "+id));
+    }
+
+
+service 
+controller
+
+change return type 
+ @GetMapping("/{id}")
+    public Student getStudentById(@Pathvariable Integer id ){
+        Student student = service.getStudentById(id);
+        StudentResponsetDTO res = new StudentResponseDTO(student.getId(), student.getName(), student.getCourse());
+        return res;
+    }
+      StudentResponsetDTO res = new StudentResponseDTO(student.getId(), student.getName(), student.getCourse());
+      assigning values to res
+      Pathvariable --> fetching id from url 
