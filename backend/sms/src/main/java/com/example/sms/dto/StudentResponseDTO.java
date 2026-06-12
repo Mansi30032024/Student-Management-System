@@ -5,7 +5,7 @@ public class StudentResponseDTO{
     private String name;
     private String course;
 
-    public StudentResponseDTO( Integer id, String name,  String course ) {
+    public StudentResponseDTO( Integer id, String name, String course) {
        this.id = id;
         this.name = name;
         this.course = course;
@@ -26,7 +26,8 @@ public class StudentResponseDTO{
 
     public String getCourse() {
         return course;
-    }
+     }
+    
      public void setCourse(String course) {
         this.course = course;
     }

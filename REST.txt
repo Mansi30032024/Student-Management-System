@@ -182,3 +182,12 @@ change return type
       StudentResponsetDTO res = new StudentResponseDTO(student.getId(), student.getName(), student.getCourse());
       assigning values to res
       Pathvariable --> fetching id from url 
+
+
+      End points should be a resource
+
+      illegal apis --> /bca   /count
+
+
+      Map.of () to convert string to JSON
+      stringify for object to json
