@@ -1,0 +1,34 @@
+Spring security
+
+before controller security added 
+security filter chain 
+request --> security filter chain --> controller
+
+authentication: who u r  {verifying user (username, management)}
+authorization: what u can do (allowing permission to user to perform specific tasks)
+
+Authentication
+1. session -->  session id stored in db  {cookies}
+2. token -->  nothing stored in db
+
+JWT based authentication
+
+OAuth2 ==> Open authorization 2.0 version
+Login with Google
+Login with Github
+
+
+Trying to login on a website/platform 
+OAuth2 --> Login with google selected
+Request goes to google
+Google verify who u are , only some data exposed by google to that platform u are trying to login
+
+   <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+   </dependency>
+All API blocked 
+
+firewall added , not able to bypass
+rules --> that allow requests to pass 
+
