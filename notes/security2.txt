@@ -1,0 +1,22 @@
+csrf
+cross site request forgery
+
+fake request 
+session created (session id)
+session id stored in server 
+At client side , session id stored in cookies by browser 
+
+csrf is not popular , as today we are using jwt ....
+
+firewall(security guard)
+
+server --> secure 
+
+csrf attack --> malicious websites se request bhejte  h using  session id 
+
+# Cross Site Request Forgery
+
+Cross Site--> Request comes from another website.
+```
+Forgery --> Fake request pretending to be the real user.
+

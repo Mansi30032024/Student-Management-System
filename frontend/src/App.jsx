@@ -5,6 +5,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [name, setName] = useState("");
   const [course, setCourse] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   //function to get Student data from Backend
   const getStudents = async () => {
@@ -43,6 +45,18 @@ function App() {
     }
   };
 
+  const login = async () => {
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    alert("Login Successful");
+  };
+
   return (
     <div>
       <button onClick={getStudents}>Fetch Students</button>
@@ -77,6 +91,19 @@ function App() {
       />
 
       <button onClick={addStudent}>Register</button>
+      <br />
+      <hr />
+      <input
+        placeholder="Enter Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={login}>Login</button>
     </div>
   );
 }

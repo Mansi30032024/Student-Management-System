@@ -58,3 +58,4 @@ public class Student {
 // data + methods together --> encapsulation 
 
 //reference in stack , object created in heap  (memory will be allocated in heap )
+  
