@@ -1,0 +1,20 @@
+jwt filter 
+
+jwt token
+ header.payload.signature
+
+ @Value --> fetching from application.properties 
+
+ 1000 * 60 * 60 * 10 
+
+ 1000 * 60        // 1 minute
+
+1000 * 60 * 60   // 1 hour
+
+1000 * 60 * 60 * 24   // 1 day
+
+1000 * 60 * 60 * 24 * 7 // 7 days
+
+
+@Component
+-->
