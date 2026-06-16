@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 
 @Service
@@ -27,6 +28,28 @@ public class JwtService {
                .compact();
 
             return token;
+            }
+
+            public boolean isValid(String token){
+                try{
+                    Jwts.parser()
+                    .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                    .build()
+                    .parseSignedClaims(token);
+
+                    return true;
+                }catch(Exception e){
+                    return false;
+                }
+            }
+            public String getUsername(String token){
+                return  Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+
             }
 }
 

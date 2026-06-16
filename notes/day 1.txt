@@ -1,0 +1,7 @@
+Package class ko organize karne ke liye use hota hai.
+package com.example.sms.model; 
+
+Dusri files me:
+import com.example.sms.model.Student;
+
+likhkar use kar sakte hain.

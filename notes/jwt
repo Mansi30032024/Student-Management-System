@@ -18,3 +18,5 @@ jwt token
 
 @Component
 -->
+
+application.properties.local --> hide details(password)

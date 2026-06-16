@@ -1,0 +1,41 @@
+Why so many annotations?
+developer's view
+
+field injection is easy
+
+security filters: some by dependency , some we can create (custom filter)
+
+OncePerRequestFilter --> for every request , called once
+
+Single inheritance
+
+doFilterInternal() method in Parent class.
+@Override
+
+doFilterInternals() spring thinks it is a new method
+if @Override used then spring will throw an error no such method in parent class
+
+ServletException --> tomcat server --> 8080
+IOException --> input outp
+both are used in parent class so we have to use in JwtFilter (child) class
+package com.example.sms.config;
+
+import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.ServletException;
+
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+@Override
+protected void doFilterInternal() throws ServletException, IOException{
+
+}
+}
+
+bruno hit request --> HttpServletRequest
+response --> HttpServletResponse
+FilterChain--> sare filter se pass honi chahiye request
