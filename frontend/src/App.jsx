@@ -1,69 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import StudentCard from "./components/StudentCard";
+import StudentForm from "./components/StudentForm";
 
 function App() {
-  const [students, setStudents] = useState([]);
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("");
-  const [course, setCourse] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [students, setStudents] = useState([]);
+  // const [count, setCount] = useState(0);
+  // const [name, setName] = useState("");
+  // const [course, setCourse] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
 
-  //function to get Student data from Backend
-  const getStudents = async () => {
-    const response = await fetch("http://localhost:8080/students");
-    const data = await response.json();
-    console.log(data);
-    setStudents(data);
-  };
+  // //function to get Student data from Backend
+  // const getStudents = async () => {
+  //   const response = await fetch("http://localhost:8080/students");
+  //   const data = await response.json();
+  //   console.log(data);
+  //   setStudents(data);
+  // };
 
-  const getBcaStudents = async () => {
-    const response = await fetch("http://localhost:8080/students/bca");
-    const data = await response.json();
-    console.log(data);
-    setStudents(data);
-  };
+  // const getBcaStudents = async () => {
+  //   const response = await fetch("http://localhost:8080/students/bca");
+  //   const data = await response.json();
+  //   console.log(data);
+  //   setStudents(data);
+  // };
 
-  const fetchTotalStudentsCount = async () => {
-    const response = await fetch("http://localhost:8080/students/count");
-    const data = await response.json();
-    console.log(data);
-    setCount(data);
-  };
+  // const fetchTotalStudentsCount = async () => {
+  //   const response = await fetch("http://localhost:8080/students/count");
+  //   const data = await response.json();
+  //   console.log(data);
+  //   setCount(data);
+  // };
 
-  const addStudent = async () => {
-    const response = await fetch("http://localhost:8080/students", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, course }),
-    });
-    if (response.ok) {
-      alert("Student registered");
-    } else {
-      alert("Failed to reguster!");
-    }
-  };
+  // const addStudent = async () => {
+  //   const response = await fetch("http://localhost:8080/students", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ name, course }),
+  //   });
+  //   if (response.ok) {
+  //     alert("Student registered");
+  //   } else {
+  //     alert("Failed to reguster!");
+  //   }
+  // };
 
-  const login = async () => {
-    const response = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+  // const login = async () => {
+  //   const response = await fetch("http://localhost:8080/auth/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ username, password }),
+  //   });
 
-    alert("Login Successful");
-  };
+  //   alert("Login Successful");
+  // };
 
-  const loginWithGoogle = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
-  };
+  // const loginWithGoogle = () => {
+  //   window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  // };
 
-  return (
+  {
+    /* return (
     <div>
-      <button onClick={getStudents}>Fetch Students</button>
+  <button onClick={getStudents}>Fetch Students</button>
 
       <button onClick={getBcaStudents}>Show BCA Students</button>
 
@@ -112,6 +115,49 @@ function App() {
       <hr />
       <br />
       <button onClick={loginWithGoogle}>Login with Google</button>
+      </div>
+       */
+  }
+
+  // return (
+  //   <div>
+  //     <StudentCard name="Karan" course="BCA" />
+  //     <StudentCard name="Raj" course="MCA" />
+  //     <StudentForm />
+  //   </div>
+  // );
+
+  const [students, setStudents] = useState([]);
+  const fetchStudents = async () => {
+    const response = await fetch("http://localhost:8080/students");
+    const data = await response.json();
+
+    setStudents(data);
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  return (
+    <div
+      style={{
+        padding: "20px",
+      }}
+    >
+      <h1>Student Management System</h1>
+
+      <StudentForm refreshStudents={fetchStudents} />
+
+      <hr />
+
+      {students.map((student) => (
+        <StudentCard
+          key={student.id}
+          name={student.name}
+          course={student.course}
+        />
+      ))}
     </div>
   );
 }
